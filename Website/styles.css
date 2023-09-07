@@ -1,0 +1,26 @@
+/* Style the heading */
+h1 {
+    color: blue;
+    font-size: 24px;
+}
+
+/* Style paragraphs */
+p {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+
+/* styles.css */
+#alertButton {
+    padding: 10px 20px;
+    background-color: #0074d9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#alertButton:hover {
+    background-color: #0056b3;
+}
