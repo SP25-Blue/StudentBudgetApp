@@ -1,5 +1,6 @@
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
+import { Payment } from '../core/Payment';
 
 import React from 'react';
 import {
@@ -11,6 +12,9 @@ import {
     Pressable,
     ImageBackground
 } from 'react-native';
+import { UserInfo } from '../core/user/UserInfo';
+import { User } from '../core/user/User';
+import { ApplicationService } from '../core/services/ApplicationService';
 
 export default function PageAuthenticationScreen() {
     return (
@@ -19,7 +23,15 @@ export default function PageAuthenticationScreen() {
                 <Text style={styles.title}>
                     Welcome to SpendSense
                 </Text>
-                <Pressable style={({ pressed }) => [styles.button1, { opacity: pressed ? 0.5 : 1 }]}>
+                <Pressable onPress={() => {
+                    const myPayment = new Payment(100, "Initial")
+                    myPayment.print()
+                    ApplicationService.changeUser('Elliot Larez', "123")
+                    ApplicationService.printUser()
+                    ApplicationService.changeUser('Reginald Appiah', "123")
+                    ApplicationService.printUser()
+                }}
+                    style={({ pressed }) => [styles.button1, { opacity: pressed ? 0.5 : 1 }]}>
                     <Text style={styles.button1_text}>
                         Log In
                     </Text>
