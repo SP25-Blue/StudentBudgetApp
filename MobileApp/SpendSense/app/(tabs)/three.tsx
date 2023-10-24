@@ -13,6 +13,8 @@ export default function TabThreeScreen() {
   );
 }
 
+<img src={ 'sample_budget_pie-chart' } />
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
