@@ -15,28 +15,31 @@ import {
 import { UserInfo } from '../core/user/UserInfo';
 import { User } from '../core/user/User';
 import { ApplicationService } from '../core/services/ApplicationService';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function PageAuthenticationScreen() {
     return (
-        <ImageBackground source={require('../../assets/images/Backgrounds/Leaf.png')} style={styles.image}>
+        <ImageBackground style={styles.image}
+            source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={styles.container}>
-                <Text style={styles.title}>
-                    Welcome to SpendSense
-                </Text>
-                <Pressable onPress={() => {
-                    const myPayment = new Payment(100, "Initial")
-                    myPayment.print()
-                    ApplicationService.changeUser('Elliot Larez', "123")
-                    ApplicationService.printUser()
-                    ApplicationService.changeUser('Reginald Appiah', "123")
-                    ApplicationService.printUser()
-                }}
-                    style={({ pressed }) => [styles.button1, { opacity: pressed ? 0.5 : 1 }]}>
-                    <Text style={styles.button1_text}>
-                        Log In
-                    </Text>
+                <Text style={styles.title}>Welcome to SpendSense!</Text>
+                <Pressable style={styles.button1}
+                    onPress={() => {
+                        console.log('page_authentication: button pressed (LOG IN)')
+                        /*
+                        const myPayment = new Payment(100, "Initial")
+                        myPayment.print()
+                        ApplicationService.changeUser('Elliot Larez', "123")
+                        ApplicationService.printUser()
+                        ApplicationService.changeUser('Reginald Appiah', "123")
+                        ApplicationService.printUser()*/
+                    }}>
+                    <Text style={styles.button1_text}> Log In </Text>
                 </Pressable>
-                <Pressable style={({ pressed }) => [styles.button1, { opacity: pressed ? 0.5 : 1 }]}>
+                <Pressable style={({ pressed }) => [styles.button1, { opacity: pressed ? 0.5 : 1 }]}
+                    onPress={() => {
+                        console.log('page_authentication: button pressed (CREATE ACCOUNT)')
+                    }}>
                     <Text style={styles.button1_text}>
                         Create Account
                     </Text>
