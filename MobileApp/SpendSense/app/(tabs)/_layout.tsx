@@ -44,10 +44,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="(debugs)/debug_page_navigation"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Debug Navigation',
+          tabBarIcon: ({ color }) => <TabBarIcon name="mobile" color={color} />,
         }}
       />
       <Tabs.Screen

@@ -16,6 +16,7 @@ import { UserInfo } from '../core/user/UserInfo';
 import { User } from '../core/user/User';
 import { ApplicationService } from '../core/services/ApplicationService';
 import { ScrollView } from 'react-native-gesture-handler';
+import { commonStyles, pressableStyles } from '../../constants/Styles';
 
 export default function PageAuthenticationScreen() {
     return (
@@ -36,11 +37,11 @@ export default function PageAuthenticationScreen() {
                     }}>
                     <Text style={styles.button1_text}> Log In </Text>
                 </Pressable>
-                <Pressable style={({ pressed }) => [styles.button1, { opacity: pressed ? 0.5 : 1 }]}
+                <Pressable style={({ pressed }) => pressed ? pressableStyles.pressed : styles.button1_pressed}
                     onPress={() => {
                         console.log('page_authentication: button pressed (CREATE ACCOUNT)')
                     }}>
-                    <Text style={styles.button1_text}>
+                    <Text style={commonStyles.text}>
                         Create Account
                     </Text>
                 </Pressable>
@@ -80,6 +81,19 @@ const styles = StyleSheet.create({
         gap: 10,
         borderRadius: 16,
         backgroundColor: '#38B7FE',
+        shadowOffset: { width: 10, height: 10 },
+        shadowRadius: 10,
+        shadowColor: '#00FF00',
+    },
+    button1_pressed: {
+        width: 312,
+        paddingVertical: 16,
+        paddingHorizontal: 44,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
+        borderRadius: 16,
+        backgroundColor: '#F8070E',
         shadowOffset: { width: 10, height: 10 },
         shadowRadius: 10,
         shadowColor: '#00FF00',
