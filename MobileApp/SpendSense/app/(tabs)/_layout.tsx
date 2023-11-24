@@ -71,6 +71,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="page_createAccount"
+        options={{
+          title: 'Create Account',
+          tabBarIcon: ({ color }) => <TabBarIcon name="address-book" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
