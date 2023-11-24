@@ -8,11 +8,11 @@ body {
 
 /* Style the header */
 header {
-    background-color: #666;
+    background-color: #90EE90;
     padding: 30px;
     text-align: center;
     font-size: 35px;
-    color: white;
+    color: #023020;
 }
 
 /* Create two columns/boxes that floats next to each other */
@@ -35,7 +35,7 @@ article {
     float: left;
     padding: 20px;
     width: 70%;
-    background-color: #f1f1f1;
+    background-color: #90EE90;
     height: 300px;
     /* only for demonstration, should be removed */
 }
@@ -49,10 +49,10 @@ section::after {
 
 /* Style the footer */
 footer {
-    background-color: #777;
+    background-color: #90EE90;
     padding: 10px;
     text-align: center;
-    color: white;
+    color: #023020;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
