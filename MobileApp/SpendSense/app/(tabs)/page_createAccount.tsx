@@ -41,12 +41,25 @@ export default function PageCreateAccountScreen() {
                         secureTextEntry={true}
                         placeholder='Enter password'
                     />
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => createUser(username, password, password2)}>
+                        <Text style={textStyles.button}> Create Account </Text>
+                    </Pressable>
                 </ScrollView >
             </View>
         </ImageBackground>
     );
 }
 
-//#region Username Field
+function createUser(
+    username: string,
+    password: string,
+    password2: string) {
 
-//#endregion
+    const validUsername = false;
+    const validPassword = false;
+
+    if (password === password2) console.log("YES");
+    else console.log("NO");
+}
