@@ -1,26 +1,92 @@
 import { StyleSheet } from 'react-native';
 
-export const commonStyles = StyleSheet.create({
-    container: {
+
+export const imageStyles = StyleSheet.create({
+    background: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-    },
+    }
+})
+
+
+export const textStyles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontWeight: 'bold',
     },
-    button: {
-        backgroundColor: 'blue',
-        padding: 10,
-        borderRadius: 5,
+    title: {
+        color: '#1EAEFF',
+        fontSize: 40,
+        fontStyle: 'normal',
+        fontWeight: '500',
+        textAlign: 'center',
+        backgroundColor: 'white'
     },
-});
+    button: {
+        color: '#FFFFFF',
+        fontSize: 20,
+        fontStyle: 'normal',
+        fontWeight: '500',
+        textAlign: 'center',
+    },
+    linkText: {
+        fontSize: 14,
+        color: '#2e78b7',
+    },
+    sectionHeader: {
+        paddingTop: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 20,
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(247,247,247,1.0)',
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
+})
 
-export const pressableStyles = StyleSheet.create({
-    // Add styles specific to your Pressable component
-    // For example:
+
+export const buttonStyles = StyleSheet.create({
+    active: {
+        width: 312,
+        paddingVertical: 16,
+        paddingHorizontal: 44,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
+        borderRadius: 16,
+        backgroundColor: '#38B7FE',
+        shadowOffset: { width: 10, height: 10 },
+        shadowRadius: 10,
+        shadowColor: '#00FF00',
+        opacity: 1
+    },
     pressed: {
-        backgroundColor: 'darkblue',
+        width: 312,
+        paddingVertical: 16,
+        paddingHorizontal: 44,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
+        borderRadius: 16,
+        backgroundColor: '#38B7FE',
+        shadowOffset: { width: 10, height: 10 },
+        shadowRadius: 10,
+        shadowColor: '#00FF00',
+        opacity: 0.5
+    },
+})
+
+
+export const viewStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
