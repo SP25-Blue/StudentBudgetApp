@@ -1,14 +1,23 @@
 import { UserInfo } from "./UserInfo";
 
 export class User {
-
-    private information: UserInfo;
-
-    constructor(information: UserInfo) {
-        this.information = information;
+    private _username: string;
+    get username(): string {
+        return this._username;
     }
 
-    public updateInfo(new_information: UserInfo): void {
-        this.information = new_information
+    private _password: string;
+    get password(): string {
+        return this._password;
+    }
+
+    public constructor(username: string, password: string) {
+        this._username = username;
+        this._password = password;
+    }   //TODO: Throw Username and Password exceptions
+
+
+    public toString(): string {
+        return this.username + " " + this.password;
     }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     Text,
     TextInput,
@@ -9,6 +10,8 @@ import {
 } from 'react-native';
 
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
+import { UsersDatabase } from '../../core/services/DatabaseService';
+import { User } from '../../core/user/User';
 
 export default function PageCreateAccountScreen() {
     const [username, onChangeUsername] = React.useState('');
@@ -60,6 +63,12 @@ function createUser(
     const validUsername = false;
     const validPassword = false;
 
-    if (password === password2) console.log("YES");
-    else console.log("NO");
-}
+    if (password === password2) {
+        let newUser = new User(username, password)
+        UsersDatabase.addUser(newUser);
+        console.log(UsersDatabase.toString());
+    }
+    else {
+
+    }
+} //TODO: Manage Errors
