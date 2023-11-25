@@ -16,8 +16,6 @@ import { User } from '../../core/user/User';
 export default function PageCreateAccountScreen() {
     const [username, onChangeUsername] = React.useState('');
     const [password, onChangePassword] = React.useState('');
-    const [password2, onChangePassword2] = React.useState('');
-
 
     return (
         <ImageBackground style={imageStyles.background}
@@ -30,24 +28,18 @@ export default function PageCreateAccountScreen() {
                     <TextInput style={inputStyles.text}
                         value={username}
                         onChangeText={onChangeUsername}
-                        placeholder='Enter username'
+                        placeholder='Username'
                     />
                     <TextInput style={inputStyles.text}
                         value={password}
                         onChangeText={onChangePassword}
                         secureTextEntry={true}
-                        placeholder='Enter password'
-                    />
-                    <TextInput style={inputStyles.text}
-                        value={password2}
-                        onChangeText={onChangePassword2}
-                        secureTextEntry={true}
-                        placeholder='Enter password'
+                        placeholder='Password'
                     />
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() => createUser(username, password, password2)}>
-                        <Text style={textStyles.button}> Create Account </Text>
+                        onPress={() => logIn(username, password)}>
+                        <Text style={textStyles.button}> Log In </Text>
                     </Pressable>
                 </ScrollView >
             </View>
@@ -55,31 +47,19 @@ export default function PageCreateAccountScreen() {
     );
 }
 
-function createUser(
+function logIn(
     username: string,
-    password: string,
-    password2: string) {
+    password: string) {
 
     let now = new Date();
     console.log("\n{\n" + now.toLocaleTimeString())
 
-    let validUsername = false;
-    let validPassword = false;
+    let user = UsersDatabase.getUser_UsernamePassword(username, password);
 
-    if (password === password2) {
-        let newUser = new User(username, password)
+    if (user === undefined)
+        console.log('User not found')
+    else
+        console.log('User found')
 
-        if (UsersDatabase.addUser(newUser)) {
-            console.log('User added!')
-            console.log(UsersDatabase.toString());
-        } else {
-            console.log('User not added!')
-        }
-    }
-    else {
-        console.log('Password does not match!')
-    }
-
-    now = new Date();
     console.log(now.toLocaleTimeString() + "\n}")
 } //TODO: Manage Errors

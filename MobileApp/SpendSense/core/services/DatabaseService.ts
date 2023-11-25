@@ -8,9 +8,20 @@ export class UsersDatabase {
     private static _usersDict = new Map<string, User>();
     // Users Dictionary: id -> user
 
-    public static getUser(id: string): User | undefined {
-        return this._usersDict.get(id);
+    public static getUser_Id(id: string): User | undefined {
+        let user = this._usersDict.get(id);
+        return user;
     }
+
+
+    public static getUser_UsernamePassword(username: string, password: string): User | undefined {
+        for (let [id, user] of this._usersDict.entries())
+            if (username === username &&
+                password === password)
+                return user;
+        return undefined;
+    }
+
 
     public static addUser(newUser: User): boolean {
         let isNewUserAdded = false
