@@ -91,6 +91,16 @@ export const viewStyles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexWrap: 'nowrap'
-
     },
 });
+
+
+export const inputStyles = StyleSheet.create({
+    text: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+});
+

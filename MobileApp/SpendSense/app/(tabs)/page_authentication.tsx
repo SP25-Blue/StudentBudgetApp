@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { buttonStyles, imageStyles, textStyles, viewStyles } from '../../constants/Styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PageAuthenticationScreen() {
     return (

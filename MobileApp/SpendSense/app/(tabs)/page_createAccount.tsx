@@ -1,16 +1,52 @@
 import React from 'react';
 import {
     Text,
+    TextInput,
     View,
     Pressable,
-    ImageBackground
+    ImageBackground,
+    ScrollView
 } from 'react-native';
-import { imageStyles } from '../../constants/Styles';
+
+import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
 
 export default function PageCreateAccountScreen() {
+    const [username, onChangeUsername] = React.useState('');
+    const [password, onChangePassword] = React.useState('');
+    const [password2, onChangePassword2] = React.useState('');
+
+
     return (
         <ImageBackground style={imageStyles.background}
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
+            <View style={viewStyles.container}>
+                <ScrollView>
+                    <Text style={textStyles.button}>
+                        Welcome to SpendSense!
+                    </Text>
+                    <TextInput style={inputStyles.text}
+                        value={username}
+                        onChangeText={onChangeUsername}
+                        placeholder='Enter username'
+                    />
+                    <TextInput style={inputStyles.text}
+                        value={password}
+                        onChangeText={onChangePassword}
+                        secureTextEntry={true}
+                        placeholder='Enter password'
+                    />
+                    <TextInput style={inputStyles.text}
+                        value={password2}
+                        onChangeText={onChangePassword2}
+                        secureTextEntry={true}
+                        placeholder='Enter password'
+                    />
+                </ScrollView >
+            </View>
         </ImageBackground>
     );
 }
+
+//#region Username Field
+
+//#endregion

@@ -44,13 +44,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="debugs/debug_page"
-        options={{
-          title: 'Debug Navigation',
-          tabBarIcon: ({ color }) => <TabBarIcon name="mobile" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="page_authentication"
         options={{
           title: 'Authentication',
