@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 export const imageStyles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: 'center',
+        width: '100%',
     }
 })
 
@@ -86,7 +86,11 @@ export const buttonStyles = StyleSheet.create({
 export const viewStyles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        flexDirection: 'column',
+        direction: 'ltr',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        flexWrap: 'nowrap'
+
     },
 });
