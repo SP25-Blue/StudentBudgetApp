@@ -60,15 +60,26 @@ function createUser(
     password: string,
     password2: string) {
 
-    const validUsername = false;
-    const validPassword = false;
+    let now = new Date();
+    console.log("{\n\n" + now.toLocaleTimeString())
+
+    let validUsername = false;
+    let validPassword = false;
 
     if (password === password2) {
         let newUser = new User(username, password)
-        UsersDatabase.addUser(newUser);
-        console.log(UsersDatabase.toString());
+
+        if (UsersDatabase.addUser(newUser)) {
+            console.log('User added!')
+            console.log(UsersDatabase.toString());
+        } else {
+            console.log('User not added!')
+        }
     }
     else {
-
+        console.log('Password does not match!')
     }
+
+    now = new Date();
+    console.log(now.toLocaleTimeString() + "\n}")
 } //TODO: Manage Errors
