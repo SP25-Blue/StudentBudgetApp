@@ -29,7 +29,7 @@ body {
     margin: auto;
     padding: 35px 0;
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: space-between;
   }
   
@@ -39,22 +39,42 @@ header {
     padding: 30px;
     text-align: center;
     font-size: 35px;
-    color: #023020;
+    color: #40ef7a;
+}
 
 /* Create two columns/boxes that floats next to each other */
+nav {
+    float: left;
+    text-align-last: left;
+    width: 30%;
+    height: 300px;
+    /* only for demonstration, should be removed */
+    padding: 20px;
+}
 
 /* Style the list inside the menu */
 nav ul {
     list-style-type: none;
     padding: 0;
 }
+.loginScreenshot{
+    background-image: url("Images/CreateAccount.png");
+    width: 10%;
+    height: 500px;
+    padding: 0;
+    align-items: center;
+    background-position: center;
 
+}
 .article {
-    float: left;
-    padding: 20px;
-    width: 70%;
-    background-color: #90EE90;
-    height: 300px;
+    float: right;
+    width: 20%;
+    background-color: #40ef7a;
+    .text{
+        padding: 40px;
+        opacity: 1.0;
+    }
+    height: 100vh;
     /* only for demonstration, should be removed */
 }
 
@@ -76,6 +96,7 @@ footer {
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
+
     nav,
     article {
         width: 100%;
@@ -97,4 +118,4 @@ footer {
     background-color: #0056b3;
 }
 
-}
+
