@@ -8,13 +8,31 @@ body {
 .banner{
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.0), rgba(0, 0, 0, 255)), url(Images/personDoingFinances.png);
+    background-image: linear-gradient(rgba(255, 255, 255, 255)rgba(55, 168, 76, 0));
     background-size: cover;
     background-position: center;
 }
 
-
-
+/* Container holding the image and the text */
+.container {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.0), rgba(0, 0, 0, 255)), url(Images/personDoingFinances.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+  .navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
 /* Style the header */
 header {
     background-image: linear-gradient(rgba(255, 255, 255, 0.0), rgba(0, 0, 0, 255)), url(Images/personDoingFinances.png);
@@ -22,17 +40,8 @@ header {
     text-align: center;
     font-size: 35px;
     color: #023020;
-}
 
 /* Create two columns/boxes that floats next to each other */
-nav {
-    float: left;
-    width: 30%;
-    height: 300px;
-    /* only for demonstration, should be removed */
-    background: #ccc;
-    padding: 20px;
-}
 
 /* Style the list inside the menu */
 nav ul {
@@ -40,7 +49,7 @@ nav ul {
     padding: 0;
 }
 
-article {
+.article {
     float: left;
     padding: 20px;
     width: 70%;
@@ -56,6 +65,7 @@ section::after {
     clear: both;
 }
 
+
 /* Style the footer */
 footer {
     background-color: #90EE90;
@@ -66,7 +76,6 @@ footer {
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
-
     nav,
     article {
         width: 100%;
@@ -86,4 +95,6 @@ footer {
 
 #alertButton:hover {
     background-color: #0056b3;
+}
+
 }
