@@ -9,7 +9,6 @@ export class ApplicationService {
     }
 
     static changeUser(username: string, password: string): void {
-        const userInfo = new UserInfo("John Smith", password, 'abc@gmail.com', username);
-        this.activeUser = new User(userInfo)
+
     }
 }

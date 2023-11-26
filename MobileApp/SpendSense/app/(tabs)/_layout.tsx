@@ -44,27 +44,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="three"
-        options={{
-          title: 'Tab Three',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="page_discover"
-        options={{
-          title: 'Discover',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="page_authentication"
         options={{
           title: 'Authentication',
@@ -76,6 +55,20 @@ export default function TabLayout() {
         options={{
           title: 'Create Account',
           tabBarIcon: ({ color }) => <TabBarIcon name="address-book" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="page_discover"
+        options={{
+          title: 'Discover',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="page_debug"
+        options={{
+          title: 'Debug',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
     </Tabs>
