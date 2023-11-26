@@ -1,4 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { AntDesign } from '@expo/vector-icons';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
@@ -47,28 +48,32 @@ export default function TabLayout() {
         name="page_authentication"
         options={{
           title: 'Authentication',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) =>
+            <AntDesign name="user" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="page_createAccount"
         options={{
           title: 'Create Account',
-          tabBarIcon: ({ color }) => <TabBarIcon name="address-book" color={color} />,
+          tabBarIcon: ({ color }) =>
+            <AntDesign name="adduser" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="page_discover"
+        name="page_login"
         options={{
-          title: 'Discover',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Log In',
+          tabBarIcon: ({ color }) =>
+            <AntDesign name="login" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="page_debug"
         options={{
           title: 'Debug',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) =>
+            <AntDesign name="piechart" size={24} color={color} />,
         }}
       />
     </Tabs>
