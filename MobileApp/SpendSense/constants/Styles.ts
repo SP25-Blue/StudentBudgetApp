@@ -98,9 +98,9 @@ export const viewStyles = StyleSheet.create({
 export const inputStyles = StyleSheet.create({
     text: {
         height: 40,
-        margin: 12,
         borderWidth: 1,
         padding: 10,
+        backgroundColor: '#FFFFFF'
     },
 });
 
