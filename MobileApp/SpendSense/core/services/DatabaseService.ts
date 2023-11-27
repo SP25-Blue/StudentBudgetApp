@@ -8,6 +8,7 @@ export class UsersDatabase {
     private static _usersDict = new Map<string, User>();
     // Users Dictionary: id -> user
 
+
     public static getUser_Id(id: string): User | undefined {
         let user = this._usersDict.get(id);
         return user;
@@ -40,6 +41,7 @@ export class UsersDatabase {
             return true;
         }
     }   //TODO: Report errors
+
 
     public static toString(): string {
         let str = "";
