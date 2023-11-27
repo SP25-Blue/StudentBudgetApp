@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { buttonStyles, imageStyles, textStyles, viewStyles } from '../../constants/Styles';
-import { Link } from 'expo-router';
+import { router } from 'expo-router';
 
 export default function PageAuthenticationScreen() {
     return (
@@ -16,24 +16,18 @@ export default function PageAuthenticationScreen() {
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={viewStyles.container}>
                 <ScrollView>
-
-                    <Link href="/pages/page_login">
-                        <Pressable style={({ pressed }) =>
-                            pressed ? buttonStyles.pressed : buttonStyles.active}
-                            onPress={() => { console.log('page_authentication: button pressed (LOG IN)') }}>
-                            <Text style={textStyles.button}> Log In </Text>
-                        </Pressable>
-                    </Link>
-
-                    <Link href="/pages/page_createAccount">
-                        <Pressable style={({ pressed }) =>
-                            pressed ? buttonStyles.pressed : buttonStyles.active}
-                            onPress={() => { console.log('page_authentication: button pressed (CREATE ACCOUNT)') }}>
-                            <Text style={textStyles.button}> Create Account </Text>
-                        </Pressable>
-                    </Link>
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => { router.replace("/pages/page_login") }}>
+                        <Text style={textStyles.button}> Log In </Text>
+                    </Pressable>
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => { router.replace("/pages/page_createAccount") }}>
+                        <Text style={textStyles.button}> Create Account </Text>
+                    </Pressable>
                 </ScrollView>
-            </View>;
+            </View>
         </ImageBackground>
     );
 }

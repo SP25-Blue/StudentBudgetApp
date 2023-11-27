@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     Text,
@@ -12,12 +12,25 @@ import {
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
 import { UsersDatabase } from '../../core/services/DatabaseService';
 import { User } from '../../core/user/User';
+import { useUser } from '../contexts/context';
+
+
+
 
 export default function PageCreateAccountScreen() {
     const [username, onChangeUsername] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [password2, onChangePassword2] = React.useState('');
+    const { login } = useUser();
 
+
+    const handleLogin = () => {
+        // Perform login logic and get user data
+        const userData: User = new User("test_user", "password");
+
+        // Update user context with the logged-in user
+        login(userData);
+    };
 
     return (
         <ImageBackground style={imageStyles.background}
@@ -46,7 +59,11 @@ export default function PageCreateAccountScreen() {
                     />
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() => createUser(username, password, password2)}>
+                        onPress={() => {
+                            let newUser = createUser(username, password, password2);
+                            if (newUser) login(newUser);
+                        }
+                        }>
                         <Text style={textStyles.button}> Create Account </Text>
                     </Pressable>
                 </ScrollView >
@@ -55,10 +72,7 @@ export default function PageCreateAccountScreen() {
     );
 }
 
-function createUser(
-    username: string,
-    password: string,
-    password2: string) {
+function createUser(username: string, password: string, password2: string): User | undefined {
 
     let now = new Date();
     console.log("\n{\n" + now.toLocaleTimeString())
@@ -70,16 +84,17 @@ function createUser(
         let newUser = new User(username, password)
 
         if (UsersDatabase.addUser(newUser)) {
-            console.log('User added!')
-            console.log(UsersDatabase.toString());
+            console.log('User added!');
+            return newUser;
         } else {
-            console.log('User not added!')
+            console.log('User not added!');
         }
     }
     else {
-        console.log('Password does not match!')
+        console.log('Password does not match!');
     }
 
     now = new Date();
     console.log(now.toLocaleTimeString() + "\n}")
+    return undefined;
 } //TODO: Manage Errors
