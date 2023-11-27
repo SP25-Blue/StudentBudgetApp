@@ -1,68 +1,46 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 
-import Colors from '../../constants/Colors';
+import { Tabs, router } from 'expo-router';
+import { Pressable } from 'react-native';
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome
-    size={28}
-    style={{ marginBottom: -3 }}
-    {...props} />;
-}
+import { MaterialIcons, FontAwesome, AntDesign, Entypo, Fontisto } from '@expo/vector-icons';
+// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const icon_size = 24;
+  const color = "black";
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-      }}>
+    <Tabs screenOptions={{}}>
 
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) =>
-            <TabBarIcon
-              name="home"
-              color={color} />,
+          tabBarIcon: () => <Entypo name="home" color={color} icon_size={icon_size} />,
           headerRight: () => (
-            <Link
-              href="/pages/page_authentication"
-              asChild>
-              <Pressable>
-                <MaterialIcons
-                  name="account-circle"
-                  size={24}
-                  color="black" />
-              </Pressable>
-            </Link>
+            <Pressable
+              onPress={() => { router.replace("/pages/page_authentication") }}>
+              <MaterialIcons name="account-circle" color={color} icon_size={icon_size} />
+            </Pressable>
           ),
         }}
       />
 
-      <Tabs.Screen
+      < Tabs.Screen
+        name="page_discover"
+        options={{
+          title: 'Discover',
+          tabBarIcon: () => <Fontisto name="world" color={color} icon_size={icon_size} />
+        }}
+      />
+
+      < Tabs.Screen
         name="page_debug"
         options={{
           title: 'Debug',
-          tabBarIcon: ({ color }) =>
-            <AntDesign
-              name="piechart"
-              size={24}
-              color={color} />,
+          tabBarIcon: () => <MaterialIcons name="account-circle" color={color} icon_size={icon_size} />
         }}
       />
-    </Tabs>
+    </Tabs >
   );
 }
