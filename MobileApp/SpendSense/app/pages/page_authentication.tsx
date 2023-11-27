@@ -18,12 +18,12 @@ export default function PageAuthenticationScreen() {
                 <ScrollView>
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() => { router.replace("/pages/page_login") }}>
+                        onPress={() => { router.push("/pages/page_login") }}>
                         <Text style={textStyles.button}> Log In </Text>
                     </Pressable>
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() => { router.replace("/pages/page_createAccount") }}>
+                        onPress={() => { router.push("/pages/page_createAccount") }}>
                         <Text style={textStyles.button}> Create Account </Text>
                     </Pressable>
                 </ScrollView>

@@ -3,10 +3,13 @@ import { Tabs, router } from 'expo-router';
 import { Pressable } from 'react-native';
 
 import { MaterialIcons, FontAwesome, AntDesign, Entypo, Fontisto } from '@expo/vector-icons';
+import { useUser } from '../contexts/context';
+import PageAuthenticationScreen from '../pages/page_authentication';
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 
-export default function TabLayout() {
-  const icon_size = 24;
+
+function TabLayout_LoggedIn(): React.JSX.Element | undefined {
+  const icon_size = 40;
   const color = "black";
 
   return (
@@ -43,4 +46,12 @@ export default function TabLayout() {
       />
     </Tabs >
   );
+}
+
+
+export default function TabLayout() {
+  const currentUser = useUser().user;
+
+  return currentUser === undefined ?
+    <PageAuthenticationScreen /> : <TabLayout_LoggedIn />
 }

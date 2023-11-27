@@ -10,9 +10,11 @@ import {
 } from 'react-native';
 
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
+
 import { UsersDatabase } from '../../core/services/DatabaseService';
 import { User } from '../../core/user/User';
 import { useUser } from '../contexts/context';
+import { router } from 'expo-router';
 
 
 
@@ -22,15 +24,6 @@ export default function PageCreateAccountScreen() {
     const [password, onChangePassword] = React.useState('');
     const [password2, onChangePassword2] = React.useState('');
     const { login } = useUser();
-
-
-    const handleLogin = () => {
-        // Perform login logic and get user data
-        const userData: User = new User("test_user", "password");
-
-        // Update user context with the logged-in user
-        login(userData);
-    };
 
     return (
         <ImageBackground style={imageStyles.background}
@@ -61,7 +54,10 @@ export default function PageCreateAccountScreen() {
                         pressed ? buttonStyles.pressed : buttonStyles.active}
                         onPress={() => {
                             let newUser = createUser(username, password, password2);
-                            if (newUser) login(newUser);
+                            if (newUser) {
+                                login(newUser);
+                                router.push("/(tabs)")
+                            }
                         }
                         }>
                         <Text style={textStyles.button}> Create Account </Text>
