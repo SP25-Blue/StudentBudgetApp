@@ -38,6 +38,14 @@ function TabLayout_LoggedIn(): React.JSX.Element | undefined {
       />
 
       < Tabs.Screen
+        name="page_weeklyReport"
+        options={{
+          title: 'Weekly Report',
+          tabBarIcon: () => <MaterialIcons name="calendar-today" color={color} icon_size={icon_size} />
+        }}
+      />
+
+      < Tabs.Screen
         name="page_debug"
         options={{
           title: 'Debug',
