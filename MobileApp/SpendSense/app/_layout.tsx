@@ -65,6 +65,9 @@ function RootLayoutNav() {
           <Stack.Screen
             name="pages/page_login"
             options={{ presentation: 'modal' }} />
+          <Stack.Screen
+            name="pages/page_createPayment  "
+            options={{ presentation: 'modal' }} />
         </Stack>
       </UserProvider>
     </ThemeProvider>
