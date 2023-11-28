@@ -57,7 +57,8 @@ export const AdsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         if (adData === undefined) {
             return;
         }
-        ads?.push(adData);
+        ads.push(adData);
+        //setAds(ads);
     };
 
     const removeAd = (adData: Advertising | undefined) => {
@@ -67,7 +68,7 @@ export const AdsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         let index = ads?.findIndex((ad) => ad !== adData);
 
         if (index !== undefined && index > 0)
-            ads?.at(index);
+            ads.at(index);
     };
 
     return (

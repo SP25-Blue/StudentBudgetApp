@@ -69,6 +69,9 @@ function RootLayoutNav() {
             <Stack.Screen
               name="pages/page_createPayment"
               options={{ presentation: 'modal' }} />
+            <Stack.Screen
+              name="pages/page_createAdvertising"
+              options={{ presentation: 'modal' }} />
           </Stack>
         </AdsProvider>
       </UserProvider>

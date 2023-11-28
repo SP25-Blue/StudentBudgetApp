@@ -6,17 +6,17 @@ export class Advertising {
 
     public description: string;
 
-    public image_path: string;
+    public imagePath: string;
 
-    public url_path: string;
+    public url: string;
 
     //#endregion
 
-    public constructor(name: string, description: string, image_path: string, url_path: string) {
+    public constructor(name: string, description: string, url: string, imagePath: string) {
         this.name = name;
         this.description = description;
-        this.image_path = image_path;
-        this.url_path = url_path;
+        this.url = url;
+        this.imagePath = imagePath;
     }
 
     //#region Methods
