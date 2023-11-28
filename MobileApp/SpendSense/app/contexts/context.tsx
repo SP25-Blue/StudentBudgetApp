@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from "react"
 import { User } from "../../core/user/User"
-import { Advertising } from "../../core/ads/advertising";
+import { Advertising } from "../../core/ads/Advertising";
 
 interface UserContextType {
     user: User | undefined;
@@ -58,7 +58,6 @@ export const AdsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             return;
         }
         ads.push(adData);
-        //setAds(ads);
     };
 
     const removeAd = (adData: Advertising | undefined) => {

@@ -28,43 +28,22 @@ const Item = ({ ad }: ItemProps) => (
 
 export default function PageDiscoverScreen() {
     const ads = useAds().ads;
-    const uploadAd = useAds().uploadAd;
-
-    //HACK: Manuallly added ads
-    let ad = new Advertising(
-        "Amazon Black Friday 2023",
-        "See our latest offers",
-        "https://sellersonar.com/blog/wp-content/uploads/2022/11/black-friday-2021-amazon.jpeg",
-        "https://www.amazon.com/");
-    uploadAd(ad);
-
-
     return (
         <ImageBackground style={imageStyles.background}
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={viewStyles.container}>
-                <ScrollView>
-                    <FlatList
-                        data={ads}
-                        renderItem={({ item }) => <Item ad={item} />}
-                        keyExtractor={item => item.name}
-                    />
-                    <Pressable
-                        onPress={() => { Linking.openURL(ad.url) }}>
-                        <Image
-                            source={{
-                                uri: ad.imagePath,
-                            }}
-                            width={100}
-                            height={100} />
-                    </Pressable>
-                    <Pressable style={({ pressed }) =>
-                        pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() => { router.push("/pages/page_createAdvertising") }}>
-                        <Text style={textStyles.button}> Create Advertising </Text>
-                    </Pressable>
-                </ScrollView>
+                <Pressable style={({ pressed }) =>
+                    pressed ? buttonStyles.pressed : buttonStyles.active}
+                    onPress={() => { router.push("/pages/page_createAdvertising") }}>
+                    <Text style={textStyles.button}> Create Advertising </Text>
+                </Pressable>
+
+                <FlatList
+                    data={ads}
+                    renderItem={({ item }) => <Item ad={item} />}
+                    keyExtractor={item => item.name}
+                />
             </View>
-        </ImageBackground>
+        </ImageBackground >
     );
 }
