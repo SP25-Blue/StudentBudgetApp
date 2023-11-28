@@ -1,5 +1,5 @@
 import { UserInfo } from "./UserInfo";
-import { Payment } from "../Payment";
+import { Payment } from "./Payment";
 
 export class User {
 
