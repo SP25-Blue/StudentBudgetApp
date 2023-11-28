@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
-import { UserContext, UserProvider } from './contexts/context';
+import { AdsProvider, UserContext, UserProvider } from './contexts/context';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,26 +49,28 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <UserProvider>
-        <Stack>
-          <Stack.Screen
-            name="(tabs)"
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="modal"
-            options={{ presentation: 'modal' }} />
-          <Stack.Screen
-            name="pages/page_authentication"
-            options={{ presentation: 'modal' }} />
-          <Stack.Screen
-            name="pages/page_createAccount"
-            options={{ presentation: 'modal' }} />
-          <Stack.Screen
-            name="pages/page_login"
-            options={{ presentation: 'modal' }} />
-          <Stack.Screen
-            name="pages/page_createPayment  "
-            options={{ presentation: 'modal' }} />
-        </Stack>
+        <AdsProvider>
+          <Stack>
+            <Stack.Screen
+              name="(tabs)"
+              options={{ headerShown: false }} />
+            <Stack.Screen
+              name="modal"
+              options={{ presentation: 'modal' }} />
+            <Stack.Screen
+              name="pages/page_authentication"
+              options={{ presentation: 'modal' }} />
+            <Stack.Screen
+              name="pages/page_createAccount"
+              options={{ presentation: 'modal' }} />
+            <Stack.Screen
+              name="pages/page_login"
+              options={{ presentation: 'modal' }} />
+            <Stack.Screen
+              name="pages/page_createPayment"
+              options={{ presentation: 'modal' }} />
+          </Stack>
+        </AdsProvider>
       </UserProvider>
     </ThemeProvider>
   );
