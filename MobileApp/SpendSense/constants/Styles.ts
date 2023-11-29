@@ -92,6 +92,15 @@ export const viewStyles = StyleSheet.create({
         alignItems: 'center',
         flexWrap: 'nowrap'
     },
+    flatlist: {
+        width: '100%',
+    },
+    clearContainer: {
+        borderRadius: 16,
+        backgroundColor: '#F0F0F0',
+        margin: 16,
+        padding: 8,
+    }
 });
 
 
