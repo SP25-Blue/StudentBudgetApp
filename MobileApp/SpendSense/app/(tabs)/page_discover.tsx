@@ -46,11 +46,11 @@ export default function PageDiscoverScreen() {
                             justifyContent: 'space-around'
                         }}>
                         {renderedAds}
-                        <Pressable style={[viewStyles.clearContainer, { width: '30%' }]}
+                        <Pressable style={[viewStyles.clearContainer, { width: '30%', }]}
                             onPress={() => { router.push("/pages/page_createAdvertising") }}>
                             <Image
                                 source={require('../../assets/images/Advertising/your_ad_here.jpg')}
-                                style={{ height: 144 }}
+                                style={{ height: 144, width: '100%' }}
                                 resizeMode="cover"
                             />
                             <Text>Create your own advertising!</Text>
