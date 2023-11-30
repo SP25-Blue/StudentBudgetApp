@@ -19,8 +19,7 @@ export const textStyles = StyleSheet.create({
         fontSize: 40,
         fontStyle: 'normal',
         fontWeight: '500',
-        textAlign: 'center',
-        backgroundColor: 'white'
+        textAlign: 'center'
     },
     button: {
         color: '#FFFFFF',

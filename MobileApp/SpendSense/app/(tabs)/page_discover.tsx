@@ -22,7 +22,9 @@ export default function PageDiscoverScreen() {
     const renderedAds = ads.map((item, index) => (
         <View style={[viewStyles.clearContainer, { width: '30%' }]}>
             <Pressable
-                onPress={() => Linking.openURL(item.url)}>
+                onPress={() => { Linking.openURL(item.url) }}>
+                <Text style={textStyles.title}
+                    numberOfLines={1} > {item.name} </Text>
                 <ImageBackground style={{ height: 144, width: '100%' }}
                     source={{ uri: item.imagePath }}
                     resizeMode='cover'
@@ -30,21 +32,20 @@ export default function PageDiscoverScreen() {
                     <Image style={{ height: '100%', width: '100%' }}
                         source={{ uri: item.imagePath }}
                         resizeMode="contain"
-
                     />
                 </ImageBackground>
-                <View style={{ height: 52, width: '100%', flexDirection: 'row', justifyContent: 'space-around', overflow: 'hidden' }}>
-                    <Text style={{ width: '20%' }} > {item.name}</Text>
-                    <Text style={{ width: '80%' }} numberOfLines={3}>{item.description}</Text>
-                </View>
+                <Text style={textStyles.text}
+                    numberOfLines={3}> {item.description} </Text>
             </Pressable >
         </View >
     ));
 
     const renderAd_YourAdHere = (
-        <View style={[viewStyles.clearContainer, { width: '30%' }]}>
+        <View style={[viewStyles.clearContainer, { height: 288, width: '30%', overflow: 'hidden' }]}>
             <Pressable
                 onPress={() => { router.push("/pages/page_createAdvertising") }}>
+                <Text style={textStyles.title}
+                    numberOfLines={1} > Your Ad Here </Text>
                 <ImageBackground style={{ height: 144, width: '100%' }}
                     source={require('../../assets/images/Advertising/your_ad_here.jpg')}
                     resizeMode='cover'
@@ -52,13 +53,10 @@ export default function PageDiscoverScreen() {
                     <Image style={{ height: '100%', width: '100%' }}
                         source={require('../../assets/images/Advertising/your_ad_here.jpg')}
                         resizeMode="contain"
-
                     />
                 </ImageBackground>
-                <View style={{ height: 52, width: '100%', flexDirection: 'row', justifyContent: 'space-around', overflow: 'hidden' }}>
-                    <Text style={{ width: '20%' }} > Your Add Here </Text>
-                    <Text style={{ width: '80%' }} numberOfLines={3}>Click here to add your ad to SpendSense!</Text>
-                </View>
+                <Text style={textStyles.text}
+                    numberOfLines={3}> Click here to add your ad to SpendSense! </Text>
             </Pressable >
         </View >
     );
