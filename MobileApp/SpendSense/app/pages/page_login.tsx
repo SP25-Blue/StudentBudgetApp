@@ -26,9 +26,10 @@ export default function PageCreateAccountScreen() {
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={viewStyles.container}>
                 <ScrollView>
-                    <Text style={textStyles.button}>
-                        Welcome to SpendSense!
-                    </Text>
+                    <View style={{ height: 20 }} />
+
+                    <Text style={[textStyles.title, { backgroundColor: '#FFFFFF', borderRadius: 24 }]}> SpendSense </Text>
+                    <View style={{ height: 100 }} />
 
                     <TextInput style={inputStyles.text}
                         value={username}
@@ -36,12 +37,16 @@ export default function PageCreateAccountScreen() {
                         placeholder='Username'
                     />
 
+                    <View style={{ height: 20 }} />
+
                     <TextInput style={inputStyles.text}
                         value={password}
                         onChangeText={onChangePassword}
                         secureTextEntry={true}
                         placeholder='Password'
                     />
+
+                    <View style={{ height: 100 }} />
 
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
