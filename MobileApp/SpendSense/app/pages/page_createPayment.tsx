@@ -17,14 +17,23 @@ import { useUser } from '../contexts/context';
 import { router } from 'expo-router';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 
 export default function PageCreatePaymentScreen() {
+
     const [name, onChangeName] = React.useState('');
     const [amount, onChangeAmount] = React.useState('');
     const [date, setDate] = React.useState(new Date());
+    const [wasPayed, setWasPayed] = React.useState(false);
 
-    const [open, setOpen] = useState(false)
+    const [openCalendar, setOpenCalendar] = useState(false);
+    const [openPayedDropDown, setOpenPayedDropDown] = useState(false);
+
+    const [items, setItems] = useState([
+        { label: 'Payed', value: true },
+        { label: 'Unpayed', value: false }
+    ]);
 
     const currentUser = useUser().user;
 
@@ -33,15 +42,16 @@ export default function PageCreatePaymentScreen() {
             setDate(date);
             // Do something with the selected date
         }
-        setOpen(false);
+        setOpenCalendar(false);
     };
 
+    DropDownPicker.setListMode("SCROLLVIEW");   //HACK DropDownPicker.setListMode("SCROLLVIEW");
 
     return (
         <ImageBackground style={imageStyles.background}
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={viewStyles.container}>
-                <ScrollView>
+                <ScrollView nestedScrollEnabled={true}>
                     <View style={{ height: 20 }} />
 
                     <Text style={[textStyles.title, { backgroundColor: '#FFFFFF', borderRadius: 24 }]}> SpendSense </Text>
@@ -64,7 +74,7 @@ export default function PageCreatePaymentScreen() {
 
                     <Text style={inputStyles.text}>{date.toDateString()}</Text>
                     {
-                        open &&
+                        openCalendar &&
                         <RNDateTimePicker
                             value={date}
                             mode="date"
@@ -73,11 +83,21 @@ export default function PageCreatePaymentScreen() {
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
                         onPress={() => {
-                            setOpen(true);
+                            setOpenCalendar(true);
                         }
                         }>
                         <Text style={textStyles.button}> Pick a Date </Text>
                     </Pressable>
+                    <View style={{ height: 20 }} />
+
+                    <DropDownPicker
+                        open={openPayedDropDown}
+                        value={wasPayed}
+                        items={items}
+                        setOpen={setOpenPayedDropDown}
+                        setValue={setWasPayed}
+                        style={{ width: 'auto' }}
+                    />
                 </ScrollView >
             </View >
         </ImageBackground >
