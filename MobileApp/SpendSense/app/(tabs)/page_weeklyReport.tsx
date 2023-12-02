@@ -29,7 +29,7 @@ export default function PageWeeklyReportScreen() {
             <Pressable style={({ pressed }) =>
                 pressed ? buttonStyles.pressed : buttonStyles.active}
                 onPress={() => { router.push("/pages/page_createPayment") }}>
-                <Text style={textStyles.button}> Create Account </Text>
+                <Text style={textStyles.button}> Create Payment </Text>
             </Pressable>
         </View >
     );

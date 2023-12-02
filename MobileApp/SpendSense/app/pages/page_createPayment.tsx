@@ -42,30 +42,27 @@ export default function PageCreatePaymentScreen() {
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={viewStyles.container}>
                 <ScrollView>
-                    <Text style={textStyles.button}>
-                        Welcome to SpendSense!
-                    </Text>
+                    <View style={{ height: 20 }} />
+
+                    <Text style={[textStyles.title, { backgroundColor: '#FFFFFF', borderRadius: 24 }]}> SpendSense </Text>
+                    <View style={{ height: 100 }} />
+
                     <TextInput style={inputStyles.text}
                         value={name}
                         onChangeText={onChangeName}
                         placeholder='Enter payment name'
                     />
+                    <View style={{ height: 20 }} />
+
                     <TextInput style={inputStyles.text}
                         value={amount}
                         keyboardType='numeric'
                         onChangeText={onChangeAmount}
-                        placeholder='$ 0.00'
+                        placeholder='Enter ammount in dolars'
                     />
-                    <TextInput style={inputStyles.text}
-                        value={date.toString()}
-                    />
-                    <Pressable style={({ pressed }) =>
-                        pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() =>
-                            setOpen(true)
-                        }>
-                        <Text style={textStyles.button}> Create Account </Text>
-                    </Pressable>
+                    <View style={{ height: 20 }} />
+
+                    <Text style={inputStyles.text}>{date.toDateString()}</Text>
                     {
                         open &&
                         <RNDateTimePicker
@@ -73,35 +70,16 @@ export default function PageCreatePaymentScreen() {
                             mode="date"
                             onChange={setDate_helper} />
                     }
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => {
+                            setOpen(true);
+                        }
+                        }>
+                        <Text style={textStyles.button}> Pick a Date </Text>
+                    </Pressable>
                 </ScrollView >
-            </View>
-        </ImageBackground>
+            </View >
+        </ImageBackground >
     );
 }
-
-function createUser(username: string, password: string, password2: string): User | undefined {
-
-    let now = new Date();
-    console.log("\n{\n" + now.toLocaleTimeString())
-
-    let validUsername = false;
-    let validPassword = false;
-
-    if (password === password2) {
-        let newUser = new User(username, password)
-
-        if (UsersDatabase.addUser(newUser)) {
-            console.log('User added!');
-            return newUser;
-        } else {
-            console.log('User not added!');
-        }
-    }
-    else {
-        console.log('Password does not match!');
-    }
-
-    now = new Date();
-    console.log(now.toLocaleTimeString() + "\n}")
-    return undefined;
-} //TODO: Manage Errors
