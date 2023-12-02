@@ -8,7 +8,7 @@
             "name": "Run npx expo start",
             "type": "node-terminal",
             "request": "launch",
-            "command": "cd \"${workspaceFolder}\\MobileApp\\Spendsense\" && npx expo start",
+            "command": "cd \"${workspaceFolder}\\MobileApp\\Spendsense\" ; npx expo start",
         },
         {
             "name": "Open Website Index",
