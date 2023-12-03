@@ -1,10 +1,11 @@
 
 import { Tabs, router } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { MaterialIcons, FontAwesome, AntDesign, Entypo, Fontisto } from '@expo/vector-icons';
 import { useUser } from '../contexts/context';
 import PageAuthenticationScreen from '../pages/page_authentication';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 
 
@@ -21,11 +22,17 @@ function TabLayout_LoggedIn(): React.JSX.Element | undefined {
           title: 'Home',
           tabBarIcon: () => <Entypo name="home" color={color} icon_size={icon_size} />,
           headerRight: () => (
-            <Pressable
+            <Pressable style={{ margin: 10 }}
               onPress={() => { router.replace("/pages/page_authentication") }}>
               <MaterialIcons name="account-circle" color={color} icon_size={icon_size} />
             </Pressable>
           ),
+          headerLeft: () => (
+            <Pressable style={{ margin: 10 }}
+              onPress={async () => { await AsyncStorage.clear() }}>
+              <MaterialIcons name="delete-forever" color={color} icon_size={icon_size} />
+            </Pressable>
+          )
         }}
       />
 
