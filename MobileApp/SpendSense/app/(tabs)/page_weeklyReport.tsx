@@ -30,15 +30,13 @@ export default function PageWeeklyReportScreen() {
 
     return (
         <View style={viewStyles.container}>
-            <ScrollView>
-                <BarChart data={paymentsData} />
-            </ScrollView>
-
             <Pressable style={({ pressed }) =>
                 pressed ? buttonStyles.pressed : buttonStyles.active}
                 onPress={() => { router.push("/pages/page_createPayment") }}>
                 <Text style={textStyles.button}> Create Payment </Text>
             </Pressable>
+
+            <BarChart data={paymentsData} />
         </View >
     );
 }
