@@ -2,6 +2,7 @@ import { ReactNode, createContext, useContext, useState } from "react"
 import { User } from "../../core/user/User"
 import { Advertising } from "../../core/ads/Advertising";
 
+//#region USER CONTEXT
 interface UserContextType {
     user: User | undefined;
     login: (userData: User) => void;
@@ -14,11 +15,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user, setUser] = useState<User | undefined>(undefined);
 
     const login = (userData: User | undefined) => {
-        if (userData === undefined) {
-            logout();
-            return;
-        }
-        setUser(userData);
+        if (userData === undefined) logout();
+        else setUser(userData);
     };
 
     const logout = () => {
@@ -34,18 +32,16 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 export const useUser = (): UserContextType => {
     const context = useContext(UserContext);
-    if (!context) {
-        throw new Error('useUser must be used within a UserProvider');
-    }
+    if (!context) throw new Error('useUser must be used within a UserProvider');
 
     return context;
 };
+//#endregion USER CONTEXT
 
-
+//#region ADS CONTEXT
 interface AdsContextType {
     ads: Advertising[];
     uploadAd: (ad: Advertising) => void;
-    removeAd: (ad: Advertising) => void;
 }
 
 export const AdsContext = createContext<AdsContextType | null>(null);
@@ -53,7 +49,8 @@ export const AdsContext = createContext<AdsContextType | null>(null);
 export const AdsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [ads, setAds] = useState<Advertising[]>(new Array<Advertising>());
 
-    //HACK: MANUALLY ADDED
+    //HACK Manually added advertising
+    //#region PUSHIN ADDS
     ads.push(new Advertising("GoodWill", "Explore second-hand clothing and home items at unbeatable prices", "https://www.goodwill.org/", "https://logos-download.com/wp-content/uploads/2018/04/Goodwill_logo_industries-1.png"));
     ads.push(new Advertising("GoodRx", "Save on prescriptions, vaccinations, and Telehealth services", "https://www.goodrx.com/go/homepage-lander-sem-7-tl-2?optly_audience=%7bnextbestaction%7d&kw=price&utm_campaign=140564372&utm_content=1521923620&utm_source=bing&utm_medium=cpc&utm_term=kwd-29266226660:loc-71124&&msclkid=2937478d81f41b2c87c322ea1d169447&utm_source=bing&utm_medium=cpc&utm_campaign=brand&utm_term=goodrx&utm_content=goodrx&gclid=2937478d81f41b2c87c322ea1d169447&gclsrc=3p.ds&ajs_event=Experiment%20Viewed&ajs_prop_experiment_name=NFD%20Promo%20Drawer&ajs_prop_variation_name=Variation_1&ajs_prop_path=/go/homepage-lander-sem-7-tl-2&ajs_aid=3749666ebf0d4e6fb071f3ccf9b1ee43", "https://mms.businesswire.com/media/20210615006229/en/885537/5/GoodRx_logo_yellow_background.jpg"))
     ads.push(new Advertising("Depop", "Buy, sell, and discover unique fashion", "https://www.depop.com/", "https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/db/69/bc/db69bc87-101d-289d-c103-7ae90ac60719/source/1280x1280bb.jpg"));
@@ -71,27 +68,15 @@ export const AdsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     ads.push(new Advertising("Lidl", "Find affordable groceries and home essentials", "https://www.lidl.com/", "https://logos-download.com/wp-content/uploads/2016/03/Lidl_logo.png"));
     ads.push(new Advertising("Feeding America", "Struggling to afford groceries? Find a food bank near you", "https://www.feedingamerica.org/find-your-local-foodbank", "https://mma.prnewswire.com/media/126271/feeding_america_logo.jpg?p=publish"));
     ads.push(new Advertising("FleaMarketZone", "Find local shops and markets for amazingly unique and affordable items", "https://fleamarketzone.com/", "https://ww1.prweb.com/prfiles/2012/08/22/10672866/FleaMarket%20logo.jpg"));
-
+    //#endregion
 
     const uploadAd = (adData: Advertising | undefined) => {
-        if (adData === undefined) {
-            return;
-        }
-        ads.push(adData);
-    };
-
-    const removeAd = (adData: Advertising | undefined) => {
-        if (adData === undefined) {
-            return;
-        }
-        let index = ads?.findIndex((ad) => ad !== adData);
-
-        if (index !== undefined && index > 0)
-            ads.at(index);
+        if (adData === undefined) return;
+        else ads.push(adData);
     };
 
     return (
-        <AdsContext.Provider value={{ ads, uploadAd, removeAd }}>
+        <AdsContext.Provider value={{ ads, uploadAd }}>
             {children}
         </AdsContext.Provider>
     );
@@ -99,9 +84,8 @@ export const AdsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
 export const useAds = (): AdsContextType => {
     const context = useContext(AdsContext);
-    if (!context) {
-        throw new Error('useAds must be used within a AdsProvider');
-    }
+    if (!context) throw new Error('useAds must be used within a AdsProvider');
 
     return context;
 };
+//#enregion

@@ -11,7 +11,6 @@ import {
 
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
 
-import { UsersDatabase } from '../../core/services/DatabaseService';
 import { User } from '../../core/user/User';
 import { useUser } from '../contexts/context';
 import { router } from 'expo-router';

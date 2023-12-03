@@ -11,10 +11,10 @@ import {
 
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
 
-import { UsersDatabase } from '../../core/services/DatabaseService';
 import { User } from '../../core/user/User';
 import { useUser } from '../contexts/context';
 import { router } from 'expo-router';
+import { UserStorage } from '../../storage/UserStorage';
 
 export default function PageCreateAccountScreen() {
     const [username, onChangeUsername] = React.useState('');
@@ -51,13 +51,17 @@ export default function PageCreateAccountScreen() {
                     <Pressable style={({ pressed }) =>
                         pressed ? buttonStyles.pressed : buttonStyles.active}
                         onPress={() => {
-                            let user = UsersDatabase.getUser_UsernamePassword(username, password);
+                            UserStorage.getUser(username, password).then((value) => {
+                                let user = value;
+                                console.log('*', user);
+                                if (user) {
+                                    login(user);
+                                    router.push("/(tabs)");
+                                } else {
+                                    //TODO Report error 
+                                }
+                            });
 
-                            if (user) {
-                                login(user);
-                                router.push("/(tabs)")
-                            }
-                            else console.log('Error: User not found')    //TODO: Report exceptions
                         }}>
                         <Text style={textStyles.button}> Log In </Text>
                     </Pressable>
