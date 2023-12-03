@@ -11,97 +11,113 @@ import {
 
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
 
-import { UsersDatabase } from '../../core/services/DatabaseService';
 import { User } from '../../core/user/User';
 import { useUser } from '../contexts/context';
 import { router } from 'expo-router';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { Payment } from '../../core/user/Payment';
 
 
 export default function PageCreatePaymentScreen() {
-    const [name, onChangeName] = React.useState('');
-    const [amount, onChangeAmount] = React.useState('');
-    const [date, setDate] = React.useState(new Date());
-
-    const [open, setOpen] = useState(false)
 
     const currentUser = useUser().user;
+    if (currentUser === undefined) return undefined;
+
+    const payments = currentUser.payments;
+
+    const [name, onChangeName] = React.useState('');
+    const [amount_str, onChangeAmountStr] = React.useState('');
+    const [date, setDate] = React.useState(new Date());
+    const [wasCompleted, setWasCompleted] = React.useState(false);
+
+    const [openCalendar, setOpenCalendar] = useState(false);
+    const [openPayedDropDown, setOpenPayedDropDown] = useState(false);
+
+    const [items, setItems] = useState([
+        { label: 'Unpayed', value: false },
+        { label: 'Payed', value: true },
+    ]);
 
     const setDate_helper = (event: any, date: any) => {     //HACK: Set to any
         if (date !== undefined) {
             setDate(date);
             // Do something with the selected date
         }
-        setOpen(false);
+        setOpenCalendar(false);
     };
 
+    DropDownPicker.setListMode("SCROLLVIEW");   //HACK DropDownPicker.setListMode("SCROLLVIEW");
 
     return (
         <ImageBackground style={imageStyles.background}
             source={require('../../assets/images/Backgrounds/Leaf.png')}>
             <View style={viewStyles.container}>
-                <ScrollView>
-                    <Text style={textStyles.button}>
-                        Welcome to SpendSense!
-                    </Text>
+                <ScrollView nestedScrollEnabled={true}>
+                    <View style={{ height: 20 }} />
+
+                    <Text style={[textStyles.title, { backgroundColor: '#FFFFFF', borderRadius: 24 }]}> SpendSense </Text>
+                    <View style={{ height: 100 }} />
+
                     <TextInput style={inputStyles.text}
                         value={name}
                         onChangeText={onChangeName}
                         placeholder='Enter payment name'
                     />
+                    <View style={{ height: 20 }} />
+
                     <TextInput style={inputStyles.text}
-                        value={amount}
-                        keyboardType='numeric'
-                        onChangeText={onChangeAmount}
-                        placeholder='$ 0.00'
+                        value={amount_str}
+                        inputMode='numeric'
+                        onChangeText={onChangeAmountStr}
+                        placeholder='Enter ammount in dolars'
                     />
-                    <TextInput style={inputStyles.text}
-                        value={date.toString()}
-                    />
-                    <Pressable style={({ pressed }) =>
-                        pressed ? buttonStyles.pressed : buttonStyles.active}
-                        onPress={() =>
-                            setOpen(true)
-                        }>
-                        <Text style={textStyles.button}> Create Account </Text>
-                    </Pressable>
+                    <View style={{ height: 20 }} />
+
+                    <Text style={inputStyles.text}>{date.toDateString()}</Text>
                     {
-                        open &&
+                        openCalendar &&
                         <RNDateTimePicker
                             value={date}
                             mode="date"
                             onChange={setDate_helper} />
                     }
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => {
+                            setOpenCalendar(true);
+                        }
+                        }>
+                        <Text style={textStyles.button}> Pick a Date </Text>
+                    </Pressable>
+                    <View style={{ height: 20 }} />
+
+                    <DropDownPicker
+                        open={openPayedDropDown}
+                        value={wasCompleted}
+                        items={items}
+                        setItems={setItems}
+                        setOpen={setOpenPayedDropDown}
+                        setValue={setWasCompleted}
+                        style={{ width: 'auto' }}
+                    />
+                    <View style={{ height: 100 }} />
+
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => {
+                            let amount = Number(amount_str)
+                            let newPayment = new Payment(name, amount, date, wasCompleted);
+
+                            payments.push(newPayment);
+                            router.replace('/page_weeklyReport');
+                        }
+                        }>
+                        <Text style={textStyles.button}> Add Payment </Text>
+                    </Pressable>
                 </ScrollView >
-            </View>
-        </ImageBackground>
+            </View >
+        </ImageBackground >
     );
 }
-
-function createUser(username: string, password: string, password2: string): User | undefined {
-
-    let now = new Date();
-    console.log("\n{\n" + now.toLocaleTimeString())
-
-    let validUsername = false;
-    let validPassword = false;
-
-    if (password === password2) {
-        let newUser = new User(username, password)
-
-        if (UsersDatabase.addUser(newUser)) {
-            console.log('User added!');
-            return newUser;
-        } else {
-            console.log('User not added!');
-        }
-    }
-    else {
-        console.log('Password does not match!');
-    }
-
-    now = new Date();
-    console.log(now.toLocaleTimeString() + "\n}")
-    return undefined;
-} //TODO: Manage Errors

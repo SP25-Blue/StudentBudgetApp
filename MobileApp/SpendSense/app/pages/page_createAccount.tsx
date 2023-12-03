@@ -11,10 +11,10 @@ import {
 
 import { buttonStyles, imageStyles, textStyles, viewStyles, inputStyles } from '../../constants/Styles';
 
-import { UsersDatabase } from '../../core/services/DatabaseService';
 import { User } from '../../core/user/User';
 import { useUser } from '../contexts/context';
 import { router } from 'expo-router';
+import { UserStorage } from '../../storage/UserStorage';
 
 
 
@@ -76,26 +76,18 @@ export default function PageCreateAccountScreen() {
 function createUser(username: string, password: string, password2: string): User | undefined {
 
     let now = new Date();
-    console.log("\n{\n" + now.toLocaleTimeString())
 
     let validUsername = false;
     let validPassword = false;
 
-    if (password === password2) {
+    if (username.length > 0) validUsername = true;
+    if (password === password2) validPassword = true;
+
+    if (validUsername && validPassword) {
         let newUser = new User(username, password)
 
-        if (UsersDatabase.addUser(newUser)) {
-            console.log('User added!');
-            return newUser;
-        } else {
-            console.log('User not added!');
-        }
+        UserStorage.createUser(newUser).then(() => { });
+        return newUser;
     }
-    else {
-        console.log('Password does not match!');
-    }
-
-    now = new Date();
-    console.log(now.toLocaleTimeString() + "\n}")
-    return undefined;
-} //TODO: Manage Errors
+    else return undefined;
+} //TODO Manage Errors
