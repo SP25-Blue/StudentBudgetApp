@@ -16,7 +16,7 @@ export class User {
 
     private _payments: Payment[];
     get payments(): Payment[] {
-        return this.payments;
+        return this._payments;
     }
     //#endregion
 
