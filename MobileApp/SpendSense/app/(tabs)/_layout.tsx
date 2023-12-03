@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function TabLayout_LoggedIn(): React.JSX.Element | undefined {
-  const icon_size = 40;
+  const icon_size = 24;
   const color = "black";
 
   return (
@@ -20,17 +20,17 @@ function TabLayout_LoggedIn(): React.JSX.Element | undefined {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: () => <Entypo name="home" color={color} icon_size={icon_size} />,
+          tabBarIcon: () => <Entypo name="home" color={color} icon_size={icon_size} size={icon_size} />,
           headerRight: () => (
             <Pressable style={{ margin: 10 }}
               onPress={() => { router.replace("/pages/page_authentication") }}>
-              <MaterialIcons name="account-circle" color={color} icon_size={icon_size} />
+              <MaterialIcons name="account-circle" color={color} icon_size={icon_size} size={icon_size} />
             </Pressable>
           ),
           headerLeft: () => (
             <Pressable style={{ margin: 10 }}
               onPress={async () => { await AsyncStorage.clear() }}>
-              <MaterialIcons name="delete-forever" color={color} icon_size={icon_size} />
+              <MaterialIcons name="delete-forever" color={color} icon_size={icon_size} size={icon_size} />
             </Pressable>
           )
         }}
@@ -40,7 +40,7 @@ function TabLayout_LoggedIn(): React.JSX.Element | undefined {
         name="page_discover"
         options={{
           title: 'Discover',
-          tabBarIcon: () => <Fontisto name="world" color={color} icon_size={icon_size} />
+          tabBarIcon: () => <Fontisto name="world" color={color} icon_size={icon_size} size={icon_size} />
         }}
       />
 
@@ -48,7 +48,7 @@ function TabLayout_LoggedIn(): React.JSX.Element | undefined {
         name="page_weeklyReport"
         options={{
           title: 'Weekly Report',
-          tabBarIcon: () => <MaterialIcons name="calendar-today" color={color} icon_size={icon_size} />
+          tabBarIcon: () => <MaterialIcons name="calendar-today" color={color} icon_size={icon_size} size={icon_size} />
         }}
       />
 
@@ -56,7 +56,7 @@ function TabLayout_LoggedIn(): React.JSX.Element | undefined {
         name="page_debug"
         options={{
           title: 'Debug',
-          tabBarIcon: () => <MaterialIcons name="account-circle" color={color} icon_size={icon_size} />
+          tabBarIcon: () => <MaterialIcons name="account-circle" color={color} icon_size={icon_size} size={icon_size} />
         }}
       />
     </Tabs >
