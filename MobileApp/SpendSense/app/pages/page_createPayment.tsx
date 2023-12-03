@@ -18,24 +18,28 @@ import { router } from 'expo-router';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { Payment } from '../../core/user/Payment';
 
 
 export default function PageCreatePaymentScreen() {
 
+    const currentUser = useUser().user;
+    if (currentUser === undefined) return undefined;
+
+    const payments = currentUser.payments;
+
     const [name, onChangeName] = React.useState('');
-    const [amount, onChangeAmount] = React.useState('');
+    const [amount_str, onChangeAmountStr] = React.useState('');
     const [date, setDate] = React.useState(new Date());
-    const [wasPayed, setWasPayed] = React.useState(false);
+    const [wasCompleted, setWasCompleted] = React.useState(false);
 
     const [openCalendar, setOpenCalendar] = useState(false);
     const [openPayedDropDown, setOpenPayedDropDown] = useState(false);
 
     const [items, setItems] = useState([
+        { label: 'Unpayed', value: false },
         { label: 'Payed', value: true },
-        { label: 'Unpayed', value: false }
     ]);
-
-    const currentUser = useUser().user;
 
     const setDate_helper = (event: any, date: any) => {     //HACK: Set to any
         if (date !== undefined) {
@@ -65,9 +69,9 @@ export default function PageCreatePaymentScreen() {
                     <View style={{ height: 20 }} />
 
                     <TextInput style={inputStyles.text}
-                        value={amount}
-                        keyboardType='numeric'
-                        onChangeText={onChangeAmount}
+                        value={amount_str}
+                        inputMode='numeric'
+                        onChangeText={onChangeAmountStr}
                         placeholder='Enter ammount in dolars'
                     />
                     <View style={{ height: 20 }} />
@@ -92,12 +96,27 @@ export default function PageCreatePaymentScreen() {
 
                     <DropDownPicker
                         open={openPayedDropDown}
-                        value={wasPayed}
+                        value={wasCompleted}
                         items={items}
+                        setItems={setItems}
                         setOpen={setOpenPayedDropDown}
-                        setValue={setWasPayed}
+                        setValue={setWasCompleted}
                         style={{ width: 'auto' }}
                     />
+                    <View style={{ height: 100 }} />
+
+                    <Pressable style={({ pressed }) =>
+                        pressed ? buttonStyles.pressed : buttonStyles.active}
+                        onPress={() => {
+                            let amount = Number(amount_str)
+                            let newPayment = new Payment(name, amount, date, wasCompleted);
+
+                            payments.push(newPayment);
+                            router.replace('/page_weeklyReport');
+                        }
+                        }>
+                        <Text style={textStyles.button}> Add Payment </Text>
+                    </Pressable>
                 </ScrollView >
             </View >
         </ImageBackground >
