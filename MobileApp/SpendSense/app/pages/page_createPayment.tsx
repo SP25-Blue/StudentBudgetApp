@@ -18,6 +18,7 @@ import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/dat
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Payment } from '../../core/user/Payment';
+import { UserStorage } from '../../storage/UserStorage';
 
 
 export default function PageCreatePaymentScreen() {
@@ -111,6 +112,7 @@ export default function PageCreatePaymentScreen() {
                             let newPayment = new Payment(name, amount, date, wasCompleted);
 
                             payments.push(newPayment);
+                            UserStorage.updateUser(currentUser);
                             router.replace('/page_weeklyReport');
                         }
                         }>

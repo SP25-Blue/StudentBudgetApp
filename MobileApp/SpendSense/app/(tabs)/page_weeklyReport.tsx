@@ -13,38 +13,93 @@ import { ScrollView } from "react-native-gesture-handler";
 import { router } from "expo-router";
 import { Payment } from "../../core/user/Payment";
 
-
-function SimpleGraph(payments: Payment[]): React.JSX.Element {
+const WeekBarChart = (payments: Payment[]) => {
     if (payments.length === 0) return (<Text>No data</Text>);
 
-    let paymentsData: any[] = []
-    payments.forEach(payment => {
-        paymentsData.push({
-            value: payment.amount,
-            label: payment.name
-        }); // https://gifted-charts.web.app/barchart
-    });
+    const sundayData = { value: 0, label: 'Sun' }
+    const mondayData = { value: 0, label: 'Mon' }
+    const tuesdayData = { value: 0, label: 'Tue' }
+    const wednesdayData = { value: 0, label: 'Wed' }
+    const thursdayData = { value: 0, label: 'Thu' }
+    const fridayData = { value: 0, label: 'Fri' }
+    const saturdayData = { value: 0, label: 'Sat' }
 
-    return (
-        <BarChart data={paymentsData} />
-    );
+    payments.forEach(payment => {
+        let amount = payment.amount;
+        let date = payment.date;
+
+        if (date.getDay() === 0) sundayData.value += amount;
+        else if (date.getDay() === 1) mondayData.value += amount;
+        else if (date.getDay() === 2) tuesdayData.value += amount;
+        else if (date.getDay() === 3) wednesdayData.value += amount;
+        else if (date.getDay() === 4) thursdayData.value += amount;
+        else if (date.getDay() === 5) fridayData.value += amount;
+        else if (date.getDay() === 6) saturdayData.value += amount;
+
+    })
+
+    let paymentsData: any[] = []
+    paymentsData.push(sundayData);
+    paymentsData.push(mondayData);
+    paymentsData.push(tuesdayData);
+    paymentsData.push(wednesdayData);
+    paymentsData.push(thursdayData);
+    paymentsData.push(fridayData);
+    paymentsData.push(saturdayData);
+
+    return (<BarChart
+        showYAxisIndices
+        noOfSections={4}
+        barWidth={20}
+        sideWidth={15}
+        isThreeD
+        height={420}
+        side="right"
+        data={paymentsData}
+        isAnimated />);
 }
 
-
-function SimpleLineGraph(payments: Payment[]): React.JSX.Element {
+const WeekPieChart = (payments: Payment[]) => {
     if (payments.length === 0) return (<Text>No data</Text>);
 
-    let paymentsData: any[] = []
+    const sundayData = { value: 0, label: 'Sun' }
+    const mondayData = { value: 0, label: 'Mon' }
+    const tuesdayData = { value: 0, label: 'Tue' }
+    const wednesdayData = { value: 0, label: 'Wed' }
+    const thursdayData = { value: 0, label: 'Thu' }
+    const fridayData = { value: 0, label: 'Fri' }
+    const saturdayData = { value: 0, label: 'Sat' }
+
     payments.forEach(payment => {
-        paymentsData.push({
-            value: payment.amount,
-            label: payment.name
-        }); // https://gifted-charts.web.app/barchart
-    });
+        let amount = payment.amount;
+        let date = payment.date;
+
+        if (date.getDay() === 0) sundayData.value += amount;
+        else if (date.getDay() === 1) mondayData.value += amount;
+        else if (date.getDay() === 2) tuesdayData.value += amount;
+        else if (date.getDay() === 3) wednesdayData.value += amount;
+        else if (date.getDay() === 4) thursdayData.value += amount;
+        else if (date.getDay() === 5) fridayData.value += amount;
+        else if (date.getDay() === 6) saturdayData.value += amount;
+
+    })
+
+    let paymentsData: any[] = []
+    paymentsData.push(mondayData);
+    paymentsData.push(tuesdayData);
+    paymentsData.push(wednesdayData);
+    paymentsData.push(thursdayData);
+    paymentsData.push(fridayData);
+    paymentsData.push(saturdayData);
+    paymentsData.push(sundayData);
 
     return (
-        <LineChart data={paymentsData} />
-    );
+        <View>
+            <View style={{ height: 100 }} />
+            <PieChart
+                data={paymentsData}
+                radius={160} />
+        </View>);
 }
 
 
@@ -61,8 +116,7 @@ export default function PageWeeklyReportScreen() {
                 onPress={() => { router.push("/pages/page_createPayment") }}>
                 <Text style={textStyles.button}> Create Payment </Text>
             </Pressable>
-
-            {SimpleGraph(payments)}
+            {WeekBarChart(payments)}
         </View >
     );
 }
