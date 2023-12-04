@@ -12,6 +12,7 @@ import { useUser } from '../contexts/context';
 import { ScrollView } from "react-native-gesture-handler";
 import { router } from "expo-router";
 import { Payment } from "../../core/user/Payment";
+import React from "react";
 
 const WeekBarChart = (payments: Payment[]) => {
     if (payments.length === 0) return (<Text>No data</Text>);
@@ -26,7 +27,8 @@ const WeekBarChart = (payments: Payment[]) => {
 
     payments.forEach(payment => {
         let amount = payment.amount;
-        let date = payment.date;
+        let date = new Date(payment.date);    //FIXME date is being parsed to string after JSON
+        console.log(typeof (date));
 
         if (date.getDay() === 0) sundayData.value += amount;
         else if (date.getDay() === 1) mondayData.value += amount;
@@ -72,7 +74,7 @@ const WeekPieChart = (payments: Payment[]) => {
 
     payments.forEach(payment => {
         let amount = payment.amount;
-        let date = payment.date;
+        let date = new Date(payment.date);    //FIXME date is being parsed to string after JSON
 
         if (date.getDay() === 0) sundayData.value += amount;
         else if (date.getDay() === 1) mondayData.value += amount;
@@ -109,14 +111,21 @@ export default function PageWeeklyReportScreen() {
     if (currentUser === undefined) return undefined;
     const payments = currentUser.payments;
 
+    const [chartNumber, setChartNumber] = React.useState(0);
+
     return (
         <View style={viewStyles.container}>
+            <View />
             <Pressable style={({ pressed }) =>
                 pressed ? buttonStyles.pressed : buttonStyles.active}
-                onPress={() => { router.push("/pages/page_createPayment") }}>
-                <Text style={textStyles.button}> Create Payment </Text>
+                onPress={() => {
+                    setChartNumber((chartNumber + 1) % 2)
+                }}>
+                <Text style={textStyles.button}> Toggle Chart </Text>
             </Pressable>
-            {WeekBarChart(payments)}
+
+            {chartNumber == 0 ? WeekBarChart(payments) : WeekPieChart(payments)}
+
         </View >
     );
 }
