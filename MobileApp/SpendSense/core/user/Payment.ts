@@ -28,15 +28,6 @@ export class Payment {
         this.frequencyInDays = frequencyInDays;
     }
 
-    toJSON() {
-        return {
-            name: this.name,
-            amount: this.amount,
-            date: this.date,
-            wasCompleted: this.wasCompleted
-        };
-    }
-
     //#region Methods
 
     //#endregion
