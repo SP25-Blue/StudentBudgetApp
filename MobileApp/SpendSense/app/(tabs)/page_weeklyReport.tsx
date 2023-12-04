@@ -64,13 +64,13 @@ const WeekBarChart = (payments: Payment[]) => {
 const WeekPieChart = (payments: Payment[]) => {
     if (payments.length === 0) return (<Text>No data</Text>);
 
-    const sundayData = { value: 0, label: 'Sun' }
-    const mondayData = { value: 0, label: 'Mon' }
-    const tuesdayData = { value: 0, label: 'Tue' }
-    const wednesdayData = { value: 0, label: 'Wed' }
-    const thursdayData = { value: 0, label: 'Thu' }
-    const fridayData = { value: 0, label: 'Fri' }
-    const saturdayData = { value: 0, label: 'Sat' }
+    const sundayData = { value: 0, label: 'Sun', text: '' }
+    const mondayData = { value: 0, label: 'Mon', text: '' }
+    const tuesdayData = { value: 0, label: 'Tue', text: '' }
+    const wednesdayData = { value: 0, label: 'Wed', text: '' }
+    const thursdayData = { value: 0, label: 'Thu', text: '' }
+    const fridayData = { value: 0, label: 'Fri', text: '' }
+    const saturdayData = { value: 0, label: 'Sat', text: '' }
 
     payments.forEach(payment => {
         let amount = payment.amount;
@@ -85,6 +85,13 @@ const WeekPieChart = (payments: Payment[]) => {
         else if (date.getDay() === 6) saturdayData.value += amount;
 
     })
+    mondayData.text = 'MON: $' + mondayData.value.toString();
+    tuesdayData.text = 'TUE: $' + tuesdayData.value.toString();
+    wednesdayData.text = 'WED: $' + wednesdayData.value.toString();
+    thursdayData.text = 'THU: $' + thursdayData.value.toString();
+    fridayData.text = 'FRI: $' + fridayData.value.toString();
+    saturdayData.text = 'SAT: $' + saturdayData.value.toString();
+    sundayData.text = 'SUN: $' + sundayData.value.toString();
 
     let paymentsData: any[] = []
     paymentsData.push(mondayData);
@@ -100,7 +107,21 @@ const WeekPieChart = (payments: Payment[]) => {
             <View style={{ height: 100 }} />
             <PieChart
                 data={paymentsData}
-                radius={160} />
+                radius={160}
+                donut
+                showText
+                showValuesAsLabels
+                showTextBackground
+                textBackgroundColor="#333"
+                textBackgroundRadius={22}
+                textColor="white"
+                textSize={16}
+                fontWeight="bold"
+                strokeWidth={10}
+                strokeColor="#333"
+                innerCircleBorderWidth={10}
+                innerCircleBorderColor="#333"
+                showGradient />
         </View>);
 }
 
